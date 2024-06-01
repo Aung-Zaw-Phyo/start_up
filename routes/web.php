@@ -1,10 +1,11 @@
 <?php
 
+use App\Livewire\Home;
+use App\Livewire\PostDetail;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', Home::class)->name('home');
+Route::get('/{postId}', PostDetail::class)->name('post-detail');
 
 Route::middleware([
     'auth:sanctum',

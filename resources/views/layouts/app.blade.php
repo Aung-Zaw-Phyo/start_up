@@ -33,7 +33,7 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main class="container px-3 mx-auto max-w-custom mt-6">
                 {{ $slot }}
             </main>
         </div>
