@@ -99,7 +99,7 @@
                                     {{ __('Manage Account') }}
                                 </div>
 
-                                <x-dropdown-link href="{{ route('profile.show') }}">
+                                <x-dropdown-link wire:navigate href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
@@ -124,6 +124,10 @@
                         </x-dropdown>
                     </div>
                 @endauth
+
+                @guest()
+                    <a wire:navigate class="underline" href="{{ route('login') }}">Login</a>
+                @endguest
             </div>
 
 

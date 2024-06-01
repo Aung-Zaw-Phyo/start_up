@@ -5,7 +5,7 @@
                 <h1 class="font-bold text-blue-600 text-2xl mb-3">{{ $post->vote }}</h1>
                 <div>Voted</div>
             </div>
-            <div class="">
+            <div class="w-full">
                 <p class="absolute top-0 right-0 p-2 pl-8 bg-white bg-opacity-85 text-sm">{{ $post->created_at->diffForHumans()}}</p>
                 <div class="flex md:hidden mb-1.5">
                     <h1 class="font-bold text-blue-600 text-lg">{{ $post->vote }}</h1>
