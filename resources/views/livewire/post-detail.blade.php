@@ -9,7 +9,7 @@
             <div class="">
                 <p class="absolute top-0 right-0 p-2 pl-8 bg-white bg-opacity-85 text-sm">{{ $this->post->created_at->diffForHumans()}}</p>
                 <div class="flex md:hidden mb-1.5">
-                    <h1 class="font-bold text-blue-600 text-lg">{{ $this->post->vote }}</h1>
+                    <h1 class="font-bold text-blue-600 text-lg">{{ count($this->post->votes) }}</h1>
                     <div class="text-xs text-gray-400">Voted</div>
                 </div>
                 <h1 class="md:text-lg font-semibold mb-2">{{ $this->post->title }}</h1>
@@ -34,9 +34,9 @@
                     <div class="flex items-center justify-end flex-wrap gap-3">
                         <div class="flex items-center">
                             <div class="px-3 py-1.5 rounded-lg text-blue-600 text-lg font-bold">
-                                {{ $this->post->vote }} Votes
+                                {{ count($this->post->votes) }} Votes
                             </div>
-                            <x-button>Vote</x-button>
+                            <x-button wire:click="vote">Vote</x-button>
                         </div>
                         <x-button @click="isShow=true">Post Comment</x-button>
                     </div>

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Laravel\Jetstream\InteractsWithBanner;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class PostDetail extends Component
@@ -39,6 +40,11 @@ class PostDetail extends Component
         }
     }
 
+    #[On('echo:votes,VoteCreated')]
+    public function notifyNewOrder()
+    {
+    }
+
     #[Computed]
     public function post(): Post
     {
@@ -55,6 +61,16 @@ class PostDetail extends Component
         $this->banner('Your comment posted.');
         $this->content = null;
         $this->showForm = false;
+    }
+
+    public function vote()
+    {
+        $this->post()->votes()->createMany([
+            [
+                "user_id" => auth()->id(),
+                "post_id" => $this->post()->id,
+            ]
+        ]);
     }
 
     public function render()

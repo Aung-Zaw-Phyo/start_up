@@ -21,7 +21,6 @@ class PostFactory extends Factory
             "user_id" => User::factory()->create(),
             "title" => $this->faker->sentence(),
             "content" => $this->faker->paragraph(mt_rand(5, 15)),
-            "vote" => $this->faker->numberBetween(0, 200)
         ];
     }
 }

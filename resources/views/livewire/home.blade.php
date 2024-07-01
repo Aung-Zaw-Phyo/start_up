@@ -2,7 +2,7 @@
     @foreach ($this->posts as $post)
         <div class="p-3 md:px-6 mb-1.5 bg-white rounded-md shadow-sm flex gap-3 relative">
             <div class="p-3 hidden md:flex flex-col items-center border-r border-gray-500">
-                <h1 class="font-bold text-blue-600 text-2xl mb-3">{{ $post->vote }}</h1>
+                <h1 class="font-bold text-blue-600 text-2xl mb-3">{{ count($post->votes) }}</h1>
                 <div>Voted</div>
             </div>
             <div class="w-full">
