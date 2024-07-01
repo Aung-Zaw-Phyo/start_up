@@ -2,27 +2,24 @@
 
 namespace App\Events;
 
-use App\Models\Vote;
+use App\Models\Comment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
-class VoteCreated implements ShouldBroadcast
+class CommentCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $vote;
+    public $comment;
     /**
      * Create a new event instance.
      */
-    public function __construct(Vote $vote)
+    public function __construct(Comment $comment)
     {
-        $this->vote = $vote;
+        $this->comment = $comment;
     }
     /**
      * Get the channels the event should broadcast on.
@@ -32,8 +29,7 @@ class VoteCreated implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('vote-created'),
+            new Channel('comment-created'),
         ];
     }
-
 }

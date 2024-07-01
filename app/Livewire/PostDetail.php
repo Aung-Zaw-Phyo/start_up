@@ -2,6 +2,8 @@
 
 namespace App\Livewire;
 
+use App\Actions\Startup\AddComment;
+use App\Actions\Startup\ToggleVote;
 use App\Models\Post;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Request;
@@ -40,8 +42,10 @@ class PostDetail extends Component
         }
     }
 
-    #[On('echo:votes,VoteCreated')]
-    public function notifyNewOrder()
+    #[On('echo:vote-created,VoteCreated')]
+    #[On('echo:vote-deleted,VoteDeleted')]
+    #[On('echo:comment-created,CommentCreated')]
+    public function refresh()
     {
     }
 
@@ -51,26 +55,18 @@ class PostDetail extends Component
         return Post::with(['user', 'comments', 'comments.user'])->findOrFail($this->postId);
     }
 
-    public function submit()
+    public function submit(AddComment $addComment)
     {
         $this->validate();
-        $this->post()->comments()->create([
-            'user_id' => auth()->user()->id,
-            'content' => $this->content,
-        ]);
+        $addComment->add($this->post(), $this->content);
         $this->banner('Your comment posted.');
         $this->content = null;
         $this->showForm = false;
     }
 
-    public function vote()
+    public function vote(ToggleVote $toggleVote)
     {
-        $this->post()->votes()->createMany([
-            [
-                "user_id" => auth()->id(),
-                "post_id" => $this->post()->id,
-            ]
-        ]);
+        $toggleVote->toggle($this->post());
     }
 
     public function render()
